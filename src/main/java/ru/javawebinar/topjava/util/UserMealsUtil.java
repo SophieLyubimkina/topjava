@@ -39,13 +39,7 @@ public class UserMealsUtil {
         for (UserMeal um : meals) {
             LocalDate localDate = um.getDateTime().toLocalDate();
             Integer calPerOneMial = um.getCalories();
-            if (calloriesPerDays.get(localDate) == null)
-            {
-                calloriesPerDays.put(localDate, calPerOneMial);
-            }
-            else{
-                calloriesPerDays.compute(localDate, (a, b) -> b + calPerOneMial);
-            }
+            calloriesPerDays.merge(localDate, calPerOneMial, (oldValue, value) -> oldValue + calPerOneMial);
         }
 
 
