@@ -47,8 +47,8 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public List<Meal> getAll(int userId) {
-
-        return repository.get(userId).values().stream().
+        Map<Integer, Meal> userMeal = repository.get(userId);
+        return userMeal.values().stream().
                 sorted((meal1, meal2) -> meal2.getDateTime().
                         compareTo(meal1.getDateTime())).collect(Collectors.toList());
     }
